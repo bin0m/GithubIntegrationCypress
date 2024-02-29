@@ -1,0 +1,16 @@
+{
+  "name": "tutorial-cypress",
+  "version": "1.0.0",
+  "description": "This contains Applitools Cypress tutorial",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@applitools/eyes-cypress": "3.41.0",
+    "cypress": "^9.1.0",
+    "cypress-intellij-reporter": "0.0.4"
+  }
+}

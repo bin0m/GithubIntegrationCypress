@@ -1,0 +1,28 @@
+pipeline {
+  agent {
+    // this image provides everything needed to run Cypress
+    docker {
+      image 'cypress/base:10'
+      args '-u root:root'
+    }
+  }
+
+  stages {
+    stage('build and test') {
+      environment {
+        APPLITOOLS_API_KEY = credentials('APPLITOOLS_API_KEY')
+        APPLITOOLS_BATCH_ID = "${GIT_COMMIT}"
+      }
+
+      steps {
+        dir("tutorial-cypress") {
+            sh 'npm ci'
+            sh 'npx eyes-setup'
+            Applitools(serverURL: "https://eyes.applitools.com", notifyByCompletion: false, applitoolsApiKey: "${APPLITOOLS_API_KEY}") {
+                sh "./node_modules/cypress/bin/cypress run --spec \"cypress/integration/examples/applitools.spec.js\""
+            }
+        }
+      }
+    }
+  }
+}
