@@ -8,7 +8,7 @@ on:
 env:
     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
     APPLITOOLS_BATCH_ID: ${{ github.sha }}
-    APPLITOOLS_SERVER_URL: https://testeyesapi.applitools.com
+    APPLITOOLS_SERVER_URL: https://testeyes.applitools.com
 
 jobs:
   run-tests:
@@ -22,6 +22,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '14.x'
+      - name: Prepare for push event may be use BranchName=${GITHUB_REPOSITORY}/${GITHUB_REF_NAME}
+        run: curl -v -L -d '' -X POST "https://testeyes.applitools.com/api/externals/github/push?apiKey=${APPLITOOLS_API_KEY}&CommitSha=${GITHUB_SHA}&BranchName=${GITHUB_REPOSITORY}/${GITHUB_REF_NAME}"
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
@@ -31,8 +33,9 @@ jobs:
     needs: run-tests
     if: always()
     runs-on: ubuntu-latest
-    steps:
+    steps:     
       - name: Update Applitools batch status 
         uses: wei/curl@v1.1.1
         with:
           args: -d "" -X POST ${{ env.APPLITOOLS_SERVER_URL }}/api/externals/github/servers/github.com/commit/${{ env.APPLITOOLS_BATCH_ID }}/complete?apiKey=${{ secrets.APPLITOOLS_API_KEY }}
+     
