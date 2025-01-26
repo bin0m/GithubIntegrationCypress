@@ -5,9 +5,9 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 });
 describe('Hello Cypress, This is Applitools', () => {
   it('works', () => {
-    cy.visit('https://demo.applitools.com/index_v2.html')
+    cy.visit('https://demo.applitools.com')
     cy.eyesOpen({
-      appName: 'Walmart Feb25 Demo',
+      appName: 'Gregory Jan25',
       testName: 'Hello'
     });
     //cy.contains('?diff2').click();
