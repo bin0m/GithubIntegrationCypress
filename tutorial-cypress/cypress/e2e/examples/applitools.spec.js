@@ -5,7 +5,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 });
 describe('Hello Cypress, This is Applitools', () => {
   it('works', () => {
-    cy.visit('https://demo.applitools.com/index.html')
+    cy.visit('https://demo.applitools.com/app.html')
     cy.eyesOpen({
       appName: 'Gregory Jan25',
       testName: 'Hello'
