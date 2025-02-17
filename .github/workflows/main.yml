@@ -9,6 +9,7 @@ env:
     APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
     APPLITOOLS_BATCH_ID: ${{ github.sha }}
     APPLITOOLS_SERVER_URL: https://testeyes.applitools.com
+    APPLITOOLS_SHOW_LOGS: ${{ true }}
 
 jobs:
   run-tests:
