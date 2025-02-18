@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: my-logs
-          path: ./logs
+          path: ./tutorial-cypress/logs
     
   # batch-completion-notification:
   #   needs: run-tests
