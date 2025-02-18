@@ -10,6 +10,7 @@ env:
     APPLITOOLS_BATCH_ID: ${{ github.sha }}
     APPLITOOLS_SERVER_URL: https://testeyes.applitools.com
     APPLITOOLS_SHOW_LOGS: ${{ true }}
+    APPLITOOLS_LOG_DIR: ./logs
 
 jobs:
   run-tests:
@@ -29,6 +30,16 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           working-directory: tutorial-cypress
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-logs
+          path: ./tutorial-cypress/logs
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: all
+          path: .
     
   # batch-completion-notification:
   #   needs: run-tests
